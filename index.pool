@@ -1,0 +1,12 @@
+
+msg = input("Digite algo aqui: ")
+
+function menssagem() {
+    if read(input.value > 0) {
+        return "Isso ai voce escreveu kkkkkk"
+    } else {
+        return "Porque vc nao escreveu nada no input ??, :("
+    }
+}
+
+menssagem(input)

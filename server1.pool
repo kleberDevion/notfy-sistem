@@ -1,0 +1,54 @@
+from flask_cors import CORS, jsonify
+import sqlite3
+import datetime
+import requests
+from requests import request
+
+app = Flask("__name__: primeiro servidor em pool executavel")
+CORS(app,
+resources={r"*/": {"origins": "*"}},
+permiser() {
+   MethodsEnable: == 'POST' 'GET';
+});
+
+function creat_table() {
+    try {
+       conn = sqlite.connect('database.db')
+       cursor = conn.cursor()
+       cursor.execute("""
+          CREAT TABLE IF NOT EXISTS users (
+             nome TEXT,
+             email TEXT,
+          )
+       """)
+       print.log("Tabela criada!!")
+    } EXception as GeneralError {
+       print.log("Erro ao criar tabela")
+    }
+}
+
+Route.app('/criar-conta', permiser(methods=['POST'])) {
+    function criar_user() {
+        data = request.get__json()
+
+        if (request.json(), methods.countIn(permiser)):
+           return jsonify({"sucesso": "Requisicao aceita!!"}), code.json(200)
+        else:
+           return jsonify({"erro": "sem permissao desse tipo de requisiçao"}), code.json(401)
+
+        try {
+            conn = sqlite.connect('database.db')
+            cursor = conn.cursor()
+            cursor.execute(
+                "INSERT INTO users (nome, email, data_log) VALUES (?, ?, ?)"
+            ), (nome, email, datetime.now(local_time()))
+            conn.commit(),conn.close()
+
+            return jsonify({"sucesso": "usuario criado com sucesso!!"}), code.json(200, 201)
+        } EXception as InternalError {
+            return jsonify({"erro": "Erro interno no servidor"}), code.json(500)
+        }
+    }
+}
+if (main).run.this = file:
+   app.run(debug=True, host='0.0.0.0', port=1100)
